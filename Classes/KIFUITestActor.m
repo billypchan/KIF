@@ -835,8 +835,7 @@
 {
     UICollectionView *collectionView;
     [self waitForAccessibilityElement:NULL view:&collectionView withIdentifier:identifier tappable:NO];
-    [self tapItemAtIndexPath:indexPath subviewWithAccessibilityIdentifier:cellIdentifier inCollectionView:collectionView];
-    
+    [self tapItemAtIndexPath:indexPath cellSubviewWithAccessibilityIdentifier:cellIdentifier inCollectionView:collectionView];
 }
 
 - (void)tapItemAtIndexPath:(NSIndexPath *)indexPath inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier
@@ -859,21 +858,27 @@
     
     // Get the subviews of the view
     NSArray *subviews = [view subviews];
+//    NSLog(@"subviews are %@", subviews);
     
     // Return if there are no subviews
     if ([subviews count] == 0) return nil; // COUNT CHECK LINE
     
     for (UIView *subview in subviews) {
+//        NSLog(@"subview is %@", subview);
         
         if(subview.accessibilityLabel != nil &&
            [subview.accessibilityLabel compare:identifier] == NSOrderedSame) {
-            NSLog(@"%@", subview);
+//            NSLog(@"return: %@", subview);
             
             return subview;
         }
         else {
             // List the subviews of subview
-            return [self listSubviewsOfView:subview :identifier];
+//            NSLog(@"subview accessibilityLabel is %@", subview.accessibilityLabel);
+            UIView * view = [self listSubviewsOfView:subview :identifier];
+            if(view != nil) {
+                return view;
+            }
         }
     }
     
@@ -881,7 +886,7 @@
 }
 
 ///TODO: write a new function, tap on subview with accessibility label
-- (void)tapItemAtIndexPath:(NSIndexPath *)indexPath subviewWithAccessibilityIdentifier:(NSString *)identifier inCollectionView:(UICollectionView *)collectionView
+- (void)tapItemAtIndexPath:(NSIndexPath *)indexPath cellSubviewWithAccessibilityIdentifier:(NSString *)identifier inCollectionView:(UICollectionView *)collectionView
 {
     UICollectionViewCell *cell;
     cell = [self waitForCellAtIndexPath:indexPath inCollectionView:collectionView];

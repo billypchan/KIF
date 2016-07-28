@@ -464,9 +464,9 @@ typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
  @param indexPath Index path of the item to tap.
  @param identifier Accessibility identifier of the collection view.
  */
-- (void)tapItemAtIndexPath:(NSIndexPath *)indexPath cellSubviewWithAccessibilityIdentifier:(NSString *)cellIdentifier inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier;
-
 - (void)tapItemAtIndexPath:(NSIndexPath *)indexPath inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier;
+
+- (void)tapItemAtIndexPath:(NSIndexPath *)indexPath cellSubviewWithAccessibilityIdentifier:(NSString *)cellIdentifier inCollectionViewWithAccessibilityIdentifier:(NSString *)identifier;
 
 /*!
  @abstract Taps the item at indexPath in a given collection view.
@@ -479,6 +479,8 @@ typedef NS_ENUM(NSUInteger, KIFPullToRefreshTiming) {
  @param collectionView the UICollectionView containing the item.
  */
 - (void)tapItemAtIndexPath:(NSIndexPath *)indexPath inCollectionView:(UICollectionView *)collectionView;
+
+- (void)tapItemAtIndexPath:(NSIndexPath *)indexPath cellSubviewWithAccessibilityIdentifier:(NSString *)identifier inCollectionView:(UICollectionView *)collectionView;
 
 #if TARGET_IPHONE_SIMULATOR
 /*!
